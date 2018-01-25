@@ -4,6 +4,7 @@
   "description": "This one for generate passwords",
   "main": "index.js",
   "scripts": {
+    "build": "babel src -d lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,5 +32,11 @@
   "bugs": {
     "url": "https://github.com/a1ike/pass-creator/issues"
   },
-  "homepage": "https://github.com/a1ike/pass-creator#readme"
+  "homepage": "https://github.com/a1ike/pass-creator#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
 }
