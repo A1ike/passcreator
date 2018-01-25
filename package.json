@@ -1,7 +1,7 @@
 {
   "name": "pass-creator",
   "version": "1.0.0",
-  "description": "On GitHub, saved changes are called commits",
+  "description": "This one for generate passwords",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
