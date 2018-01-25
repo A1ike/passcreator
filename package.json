@@ -1,0 +1,35 @@
+{
+  "name": "pass-creator",
+  "version": "1.0.0",
+  "description": "On GitHub, saved changes are called commits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a1ike/pass-creator.git"
+  },
+  "keywords": [
+    "characters",
+    "chars",
+    "create",
+    "creator",
+    "generate",
+    "generated",
+    "generator",
+    "numeric",
+    "pass",
+    "password",
+    "rand",
+    "random",
+    "randomize",
+    "randomized"
+  ],
+  "author": "Dmitry Katyushin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/a1ike/pass-creator/issues"
+  },
+  "homepage": "https://github.com/a1ike/pass-creator#readme"
+}
