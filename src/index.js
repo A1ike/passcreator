@@ -18,11 +18,37 @@
  * @api public
  */
 
-
-function passCreator(length, options) {
+function passCreator(length = 8, options = {
+  minAmountOfLowerChars: 1,
+  minAmountOfUpperChars: 1,
+  minAmountOfNums: 1,
+  minAmountOfSymbs: 0,
+  toLowerCase: false,
+  toUpperCase: false,
+}) {
 
   let result = '';
-  const passwordLenght = length;
+  let passwordLenght = length;
+
+  if (typeof (length) !== 'number') {
+    throw new TypeError('The parameter that takes the length of the password must be a number');
+    return;
+  }
+
+  if (typeof (options) !== 'object' && options !== 'null') {
+    throw new TypeError('The parameter that takes options must be an object');
+    return;
+  }
+
+  if (length < (options.minAmountOfLowerChars + options.minAmountOfUpperChars + options.minAmountOfNums + options.minAmountOfSymbs)) {
+    throw new SyntaxError('The amount of elements you entered can not be less than the length of the password');
+    return;
+  }
+
+  if (typeof (options.toLowerCase) !== 'boolean' || typeof (options.toUpperCase) !== 'boolean') {
+    throw new TypeError('Parameters "toLowerCase" / "toUpperCase" must be a true or false');
+    return;
+  }
 
   for (let i = 0; i < passwordLenght; i++) {
     let currentRandom = Math.random();
@@ -45,11 +71,19 @@ function passCreator(length, options) {
   }
 
   function randomChar() {
-    if (Math.random() > 0.5) {
+    if (Math.random() > 0.49) {
       return String.fromCharCode(randomInteger(65, 90));
     } else {
       return String.fromCharCode(randomInteger(97, 122));
     }
+  }
+
+  function randomLowerChar() {
+    return String.fromCharCode(randomInteger(97, 122));
+  }
+
+  function randomUpperChar() {
+    return String.fromCharCode(randomInteger(65, 90));
   }
 
   function randomNum() {
