@@ -24,46 +24,79 @@ function passCreator(length = 8, options = {
   minAmountOfNums: 1,
   minAmountOfSymbs: 0,
   toLowerCase: false,
-  toUpperCase: false,
+  toUpperCase: false
 }) {
 
-  let result = '';
-  let passwordLenght = length;
-
-  if (typeof (length) !== 'number') {
+  if (typeof length !== 'number') {
     throw new TypeError('The parameter that takes the length of the password must be a number');
-    return;
   }
 
-  if (typeof (options) !== 'object' && options !== 'null') {
+  if (typeof options !== 'object' && typeof options !== 'null') {
     throw new TypeError('The parameter that takes options must be an object');
-    return;
   }
 
   if (length < (options.minAmountOfLowerChars + options.minAmountOfUpperChars + options.minAmountOfNums + options.minAmountOfSymbs)) {
     throw new SyntaxError('The amount of elements you entered can not be less than the length of the password');
-    return;
   }
 
-  if (typeof (options.toLowerCase) !== 'boolean' || typeof (options.toUpperCase) !== 'boolean') {
+  if (typeof options.toLowerCase !== 'boolean' || typeof options.toUpperCase !== 'boolean') {
     throw new TypeError('Parameters "toLowerCase" / "toUpperCase" must be a true or false');
-    return;
   }
 
-  for (let i = 0; i < passwordLenght; i++) {
-    let currentRandom = Math.random();
+  let result = '';
+  let passwordLenght = length;
+  let currentPasswordPosition = 0;
 
-    if (currentRandom > 0.66) {
-      result += randomChar();
-    } else if (currentRandom < 0.65 && currentRandom > 0.33) {
-      result += randomNum();
-    } else {
-      let currentSymb = randomSymb();
-      if (currentSymb === "'") {
-        currentSymb = "\'";
-      }
-      result += currentSymb;
+  let randomCase = [];
+
+  if (options.minAmountOfLowerChars > 0) {
+    randomCase.push(randomLowerChar);
+    for (let i = 0; i < options.minAmountOfLowerChars; i++) {
+      result += randomLowerChar();
+      currentPasswordPosition++;
     }
+  }
+
+  if (options.minAmountOfUpperChars > 0) {
+    randomCase.push(randomUpperChar);
+    for (let i = 0; i < options.minAmountOfUpperChars; i++) {
+      result += randomUpperChar();
+      currentPasswordPosition++;
+    }
+  }
+
+  if (options.minAmountOfNums > 0) {
+    randomCase.push(randomNum);
+    for (let i = 0; i < options.minAmountOfNums; i++) {
+      result += randomNum();
+      currentPasswordPosition++;
+    }
+  }
+
+  if (options.minAmountOfSymbs > 0) {
+    randomCase.push(randomSymb);
+    for (let i = 0; i < options.minAmountOfSymbs; i++) {
+      result += randomSymb();
+      currentPasswordPosition++;
+    }
+  }
+
+  for (let i = currentPasswordPosition; i < passwordLenght; i++) {
+    result += randomCase[randomInteger(0, (randomCase.length - 1))]();
+  }
+
+  if (options.toLowerCase == true) {
+    result = result.toLowerCase();
+  }
+
+  if (options.toUpperCase == true) {
+    result = result.toUpperCase();
+  }
+
+  result = shuffleString(result);
+
+  function shuffleString(str) {
+    return str.split('').sort(function(){return 0.5 - Math.random()}).join('');
   }
 
   function randomInteger(min, max) {
@@ -91,8 +124,12 @@ function passCreator(length = 8, options = {
   }
 
   function randomSymb() {
-    if (Math.random() > 0.5) {
-      return String.fromCharCode(randomInteger(33, 46));
+    if (Math.random() > 0.49) {
+      let currentSymb = String.fromCharCode(randomInteger(33, 46));
+      if (currentSymb === "'") {
+        currentSymb = "\'";
+      }
+      return currentSymb;
     } else {
       return String.fromCharCode(randomInteger(58, 64));
     }
