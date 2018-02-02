@@ -15,7 +15,7 @@
     <h4>Length: <span id="length"></span></h4>
     <script src="./lib/index.js"></script>
     <script>
-        var output = passCreator(12);
+        var output = passCreator(12, {toUpperCase: true});
 
         document.getElementById('pass').value = output;
         document.getElementById('length').innerHTML = output.length;

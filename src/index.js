@@ -18,29 +18,42 @@
  * @api public
  */
 
-function passCreator(length = 8, options = {
+/* function passCreator(length = 8, options = {
   minAmountOfLowerChars: 1,
   minAmountOfUpperChars: 1,
   minAmountOfNums: 1,
   minAmountOfSymbs: 0,
   toLowerCase: false,
   toUpperCase: false
+}) { */
+
+function passCreator(length = 8, {
+  minAmountOfLowerChars = 1,
+  minAmountOfUpperChars = 1,
+  minAmountOfNums = 1,
+  minAmountOfSymbs = 0,
+  toLowerCase = false,
+  toUpperCase = false
 }) {
 
-  if (typeof length !== 'number') {
-    throw new TypeError('The parameter that takes the length of the password must be a number');
+  if (!isNotNegativeInteger(length)) {
+    throw new TypeError('The parameter that takes the length of the password must be a positive integer');
   }
 
-  if (typeof options !== 'object' && typeof options !== 'null') {
-    throw new TypeError('The parameter that takes options must be an object');
+  if (!isNotNegativeInteger(minAmountOfLowerChars) || !isNotNegativeInteger(minAmountOfUpperChars) || !isNotNegativeInteger(minAmountOfNums) || !isNotNegativeInteger(minAmountOfSymbs)) {
+    throw new TypeError('Parameters that take the number of characters must be a positive integer');
   }
 
-  if (length < (options.minAmountOfLowerChars + options.minAmountOfUpperChars + options.minAmountOfNums + options.minAmountOfSymbs)) {
-    throw new SyntaxError('The amount of elements you entered can not be less than the length of the password');
-  }
-
-  if (typeof options.toLowerCase !== 'boolean' || typeof options.toUpperCase !== 'boolean') {
+  if (typeof toLowerCase !== 'boolean' || typeof toUpperCase !== 'boolean') {
     throw new TypeError('Parameters "toLowerCase" / "toUpperCase" must be a true or false');
+  }
+
+  if ((toLowerCase && toUpperCase) || (!toLowerCase && !toUpperCase)) {
+    throw new TypeError('Parameters "toLowerCase" and "toUpperCase" can not simultaneously have the same values');
+  }
+
+  if (length < (minAmountOfLowerChars + minAmountOfUpperChars + minAmountOfNums + minAmountOfSymbs)) {
+    throw new SyntaxError('The amount of elements you entered can not be less than the length of the password');
   }
 
   let result = '';
@@ -49,33 +62,33 @@ function passCreator(length = 8, options = {
 
   let randomCase = [];
 
-  if (options.minAmountOfLowerChars > 0) {
+  if (minAmountOfLowerChars > 0) {
     randomCase.push(randomLowerChar);
-    for (let i = 0; i < options.minAmountOfLowerChars; i++) {
+    for (let i = 0; i < minAmountOfLowerChars; i++) {
       result += randomLowerChar();
       currentPasswordPosition++;
     }
   }
 
-  if (options.minAmountOfUpperChars > 0) {
+  if (minAmountOfUpperChars > 0) {
     randomCase.push(randomUpperChar);
-    for (let i = 0; i < options.minAmountOfUpperChars; i++) {
+    for (let i = 0; i < minAmountOfUpperChars; i++) {
       result += randomUpperChar();
       currentPasswordPosition++;
     }
   }
 
-  if (options.minAmountOfNums > 0) {
+  if (minAmountOfNums > 0) {
     randomCase.push(randomNum);
-    for (let i = 0; i < options.minAmountOfNums; i++) {
+    for (let i = 0; i < minAmountOfNums; i++) {
       result += randomNum();
       currentPasswordPosition++;
     }
   }
 
-  if (options.minAmountOfSymbs > 0) {
+  if (minAmountOfSymbs > 0) {
     randomCase.push(randomSymb);
-    for (let i = 0; i < options.minAmountOfSymbs; i++) {
+    for (let i = 0; i < minAmountOfSymbs; i++) {
       result += randomSymb();
       currentPasswordPosition++;
     }
@@ -85,21 +98,34 @@ function passCreator(length = 8, options = {
     result += randomCase[randomInteger(0, (randomCase.length - 1))]();
   }
 
-  if (options.toLowerCase == true) {
+  if (toLowerCase == true) {
     result = result.toLowerCase();
   }
 
-  if (options.toUpperCase == true) {
+  if (toUpperCase == true) {
     result = result.toUpperCase();
   }
 
   result = shuffleString(result);
 
   function shuffleString(str) {
-    return str.split('').sort(function(){return 0.5 - Math.random()}).join('');
+    if (typeof str !== 'string') {
+      throw new TypeError('The parameter must be a string');
+    }
+    return str.split('').sort(function () { return 0.5 - Math.random() }).join('');
+  }
+
+  function isNotNegativeInteger(number) {
+    if (typeof number !== 'number') {
+      throw new TypeError('The parameter must be a number');
+    }
+    return Number.isInteger(number) && number >= 0;
   }
 
   function randomInteger(min, max) {
+    if (typeof min !== 'number' || typeof max !== 'number') {
+      throw new TypeError('The parameters must be numbers');
+    }
     return Math.round(min - 0.5 + Math.random() * (max - min + 1));
   }
 
@@ -138,4 +164,4 @@ function passCreator(length = 8, options = {
   return result;
 }
 
-export default passCreator;
+/* export default passCreator; */
