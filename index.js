@@ -16,25 +16,21 @@
  * @api public
  */
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 function passwordNinja() {
   var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
   var _ref = arguments[1];
   var _ref$minAmountOfLower = _ref.minAmountOfLowerChars,
-    minAmountOfLowerChars = _ref$minAmountOfLower === undefined ? 1 : _ref$minAmountOfLower,
-    _ref$minAmountOfUpper = _ref.minAmountOfUpperChars,
-    minAmountOfUpperChars = _ref$minAmountOfUpper === undefined ? 1 : _ref$minAmountOfUpper,
-    _ref$minAmountOfNums = _ref.minAmountOfNums,
-    minAmountOfNums = _ref$minAmountOfNums === undefined ? 1 : _ref$minAmountOfNums,
-    _ref$minAmountOfSymbs = _ref.minAmountOfSymbs,
-    minAmountOfSymbs = _ref$minAmountOfSymbs === undefined ? 0 : _ref$minAmountOfSymbs,
-    _ref$toLowerCase = _ref.toLowerCase,
-    toLowerCase = _ref$toLowerCase === undefined ? false : _ref$toLowerCase,
-    _ref$toUpperCase = _ref.toUpperCase,
-    toUpperCase = _ref$toUpperCase === undefined ? false : _ref$toUpperCase;
+      minAmountOfLowerChars = _ref$minAmountOfLower === undefined ? 1 : _ref$minAmountOfLower,
+      _ref$minAmountOfUpper = _ref.minAmountOfUpperChars,
+      minAmountOfUpperChars = _ref$minAmountOfUpper === undefined ? 1 : _ref$minAmountOfUpper,
+      _ref$minAmountOfNums = _ref.minAmountOfNums,
+      minAmountOfNums = _ref$minAmountOfNums === undefined ? 1 : _ref$minAmountOfNums,
+      _ref$minAmountOfSymbs = _ref.minAmountOfSymbs,
+      minAmountOfSymbs = _ref$minAmountOfSymbs === undefined ? 0 : _ref$minAmountOfSymbs,
+      _ref$toLowerCase = _ref.toLowerCase,
+      toLowerCase = _ref$toLowerCase === undefined ? false : _ref$toLowerCase,
+      _ref$toUpperCase = _ref.toUpperCase,
+      toUpperCase = _ref$toUpperCase === undefined ? false : _ref$toUpperCase;
 
 
   /**
@@ -179,4 +175,4 @@ function passwordNinja() {
   return result;
 }
 
-exports.default = passwordNinja;
+module.exports = passwordNinja;

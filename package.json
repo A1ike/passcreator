@@ -1,7 +1,7 @@
 {
   "name": "password-ninja",
   "version": "1.0.0",
-  "description": "This one for generate passwords",
+  "description": "password-ninja is designed to quickly generate passwords",
   "files": [
     "index.js"
   ],
@@ -36,9 +36,9 @@
   "author": "Dmitry Katyushin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/a1ike/pass-creator/issues"
+    "url": "https://github.com/a1ike/password-ninja/issues"
   },
-  "homepage": "https://github.com/a1ike/pass-creator#readme",
+  "homepage": "https://github.com/a1ike/password-ninja#readme",
   "dependencies": {},
   "devDependencies": {
     "babel": "^6.23.0",

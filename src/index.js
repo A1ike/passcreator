@@ -163,4 +163,4 @@ function passwordNinja(length = 8, {
   return result;
 }
 
-export default passwordNinja;
+module.exports = passwordNinja;
