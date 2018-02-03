@@ -6,28 +6,15 @@
  */
 
 /**
- * special: '~!@#$%^&()_+-={}[];\',.'
- */
-
-/**
  * Description
  *
- * @param {Number} `param` Bla bla bla.
- * @param {Object} `param` Bla bla bla.
+ * @param {Number} `length` The parameter that takes the length of the password.
+ * @param {Object} `options` Optional parameters.
  * @return {String}
  * @api public
  */
 
-/* function passCreator(length = 8, options = {
-  minAmountOfLowerChars: 1,
-  minAmountOfUpperChars: 1,
-  minAmountOfNums: 1,
-  minAmountOfSymbs: 0,
-  toLowerCase: false,
-  toUpperCase: false
-}) { */
-
-function passCreator(length = 8, {
+function passwordNinja(length = 8, {
   minAmountOfLowerChars = 1,
   minAmountOfUpperChars = 1,
   minAmountOfNums = 1,
@@ -35,6 +22,10 @@ function passCreator(length = 8, {
   toLowerCase = false,
   toUpperCase = false
 }) {
+
+  /**
+   * Exception throwing if the parameters are incorrect
+   */
 
   if (!isNotNegativeInteger(length)) {
     throw new TypeError('The parameter that takes the length of the password must be a positive integer');
@@ -60,7 +51,11 @@ function passCreator(length = 8, {
   let passwordLenght = length;
   let currentPasswordPosition = 0;
 
-  let randomCase = [];
+  let randomCase = []; // Array for random function calls
+
+  /**
+   * Filling the result with minimum values
+   */
 
   if (minAmountOfLowerChars > 0) {
     randomCase.push(randomLowerChar);
@@ -94,6 +89,10 @@ function passCreator(length = 8, {
     }
   }
 
+  /**
+   * "Heart" of the generator, random filling of the result
+   */
+
   for (let i = currentPasswordPosition; i < passwordLenght; i++) {
     result += randomCase[randomInteger(0, (randomCase.length - 1))]();
   }
@@ -106,7 +105,15 @@ function passCreator(length = 8, {
     result = result.toUpperCase();
   }
 
+  /**
+   * Shuffle the generated string
+   */
+
   result = shuffleString(result);
+
+  /**
+   * Main functions
+   */
 
   function shuffleString(str) {
     if (typeof str !== 'string') {
@@ -129,14 +136,6 @@ function passCreator(length = 8, {
     return Math.round(min - 0.5 + Math.random() * (max - min + 1));
   }
 
-  function randomChar() {
-    if (Math.random() > 0.49) {
-      return String.fromCharCode(randomInteger(65, 90));
-    } else {
-      return String.fromCharCode(randomInteger(97, 122));
-    }
-  }
-
   function randomLowerChar() {
     return String.fromCharCode(randomInteger(97, 122));
   }
@@ -150,7 +149,7 @@ function passCreator(length = 8, {
   }
 
   function randomSymb() {
-    if (Math.random() > 0.49) {
+    if (Math.random() >= 0.5) {
       let currentSymb = String.fromCharCode(randomInteger(33, 46));
       if (currentSymb === "'") {
         currentSymb = "\'";
@@ -164,4 +163,4 @@ function passCreator(length = 8, {
   return result;
 }
 
-/* export default passCreator; */
+export default passwordNinja;

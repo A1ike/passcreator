@@ -8,43 +8,38 @@
  */
 
 /**
- * special: '~!@#$%^&()_+-={}[];\',.'
- */
-
-/**
  * Description
  *
- * @param {Number} `param` Bla bla bla.
- * @param {Object} `param` Bla bla bla.
+ * @param {Number} `length` The parameter that takes the length of the password.
+ * @param {Object} `options` Optional parameters.
  * @return {String}
  * @api public
  */
 
-/* function passCreator(length = 8, options = {
-  minAmountOfLowerChars: 1,
-  minAmountOfUpperChars: 1,
-  minAmountOfNums: 1,
-  minAmountOfSymbs: 0,
-  toLowerCase: false,
-  toUpperCase: false
-}) { */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function passCreator() {
+function passwordNinja() {
   var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
   var _ref = arguments[1];
   var _ref$minAmountOfLower = _ref.minAmountOfLowerChars,
-      minAmountOfLowerChars = _ref$minAmountOfLower === undefined ? 1 : _ref$minAmountOfLower,
-      _ref$minAmountOfUpper = _ref.minAmountOfUpperChars,
-      minAmountOfUpperChars = _ref$minAmountOfUpper === undefined ? 1 : _ref$minAmountOfUpper,
-      _ref$minAmountOfNums = _ref.minAmountOfNums,
-      minAmountOfNums = _ref$minAmountOfNums === undefined ? 1 : _ref$minAmountOfNums,
-      _ref$minAmountOfSymbs = _ref.minAmountOfSymbs,
-      minAmountOfSymbs = _ref$minAmountOfSymbs === undefined ? 0 : _ref$minAmountOfSymbs,
-      _ref$toLowerCase = _ref.toLowerCase,
-      toLowerCase = _ref$toLowerCase === undefined ? false : _ref$toLowerCase,
-      _ref$toUpperCase = _ref.toUpperCase,
-      toUpperCase = _ref$toUpperCase === undefined ? false : _ref$toUpperCase;
+    minAmountOfLowerChars = _ref$minAmountOfLower === undefined ? 1 : _ref$minAmountOfLower,
+    _ref$minAmountOfUpper = _ref.minAmountOfUpperChars,
+    minAmountOfUpperChars = _ref$minAmountOfUpper === undefined ? 1 : _ref$minAmountOfUpper,
+    _ref$minAmountOfNums = _ref.minAmountOfNums,
+    minAmountOfNums = _ref$minAmountOfNums === undefined ? 1 : _ref$minAmountOfNums,
+    _ref$minAmountOfSymbs = _ref.minAmountOfSymbs,
+    minAmountOfSymbs = _ref$minAmountOfSymbs === undefined ? 0 : _ref$minAmountOfSymbs,
+    _ref$toLowerCase = _ref.toLowerCase,
+    toLowerCase = _ref$toLowerCase === undefined ? false : _ref$toLowerCase,
+    _ref$toUpperCase = _ref.toUpperCase,
+    toUpperCase = _ref$toUpperCase === undefined ? false : _ref$toUpperCase;
 
+
+  /**
+   * Exception throwing if the parameters are incorrect
+   */
 
   if (!isNotNegativeInteger(length)) {
     throw new TypeError('The parameter that takes the length of the password must be a positive integer');
@@ -70,7 +65,11 @@ function passCreator() {
   var passwordLenght = length;
   var currentPasswordPosition = 0;
 
-  var randomCase = [];
+  var randomCase = []; // Array for random function calls
+
+  /**
+   * Filling the result with minimum values
+   */
 
   if (minAmountOfLowerChars > 0) {
     randomCase.push(randomLowerChar);
@@ -104,6 +103,10 @@ function passCreator() {
     }
   }
 
+  /**
+   * "Heart" of the generator, random filling of the result
+   */
+
   for (var _i4 = currentPasswordPosition; _i4 < passwordLenght; _i4++) {
     result += randomCase[randomInteger(0, randomCase.length - 1)]();
   }
@@ -116,7 +119,15 @@ function passCreator() {
     result = result.toUpperCase();
   }
 
+  /**
+   * Shuffle the generated string
+   */
+
   result = shuffleString(result);
+
+  /**
+   * Main functions
+   */
 
   function shuffleString(str) {
     if (typeof str !== 'string') {
@@ -141,14 +152,6 @@ function passCreator() {
     return Math.round(min - 0.5 + Math.random() * (max - min + 1));
   }
 
-  function randomChar() {
-    if (Math.random() > 0.49) {
-      return String.fromCharCode(randomInteger(65, 90));
-    } else {
-      return String.fromCharCode(randomInteger(97, 122));
-    }
-  }
-
   function randomLowerChar() {
     return String.fromCharCode(randomInteger(97, 122));
   }
@@ -162,7 +165,7 @@ function passCreator() {
   }
 
   function randomSymb() {
-    if (Math.random() > 0.49) {
+    if (Math.random() >= 0.5) {
       var currentSymb = String.fromCharCode(randomInteger(33, 46));
       if (currentSymb === "'") {
         currentSymb = "\'";
@@ -176,4 +179,4 @@ function passCreator() {
   return result;
 }
 
-/* export default passCreator; */
+exports.default = passwordNinja;

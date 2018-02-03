@@ -1,15 +1,18 @@
 {
-  "name": "pass-creator",
+  "name": "password-ninja",
   "version": "1.0.0",
   "description": "This one for generate passwords",
+  "files": [
+    "index.js"
+  ],
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "babel src -d ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/a1ike/pass-creator.git"
+    "url": "git+https://github.com/a1ike/password-ninja.git"
   },
   "keywords": [
     "characters",
@@ -19,6 +22,9 @@
     "generate",
     "generated",
     "generator",
+    "make",
+    "maker",
+    "ninja",
     "numeric",
     "pass",
     "password",
