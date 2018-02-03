@@ -21,7 +21,7 @@ function passwordNinja(length = 8, {
   minAmountOfSymbs = 0,
   toLowerCase = false,
   toUpperCase = false
-}) {
+} = {}) {
 
   /**
    * Exception throwing if the parameters are incorrect
@@ -39,8 +39,8 @@ function passwordNinja(length = 8, {
     throw new TypeError('Parameters "toLowerCase" / "toUpperCase" must be a true or false');
   }
 
-  if ((toLowerCase && toUpperCase) || (!toLowerCase && !toUpperCase)) {
-    throw new TypeError('Parameters "toLowerCase" and "toUpperCase" can not simultaneously have the same values');
+  if (toLowerCase && toUpperCase) {
+    throw new TypeError('Parameters "toLowerCase" and "toUpperCase" can not simultaneously have the "true" values');
   }
 
   if (length < (minAmountOfLowerChars + minAmountOfUpperChars + minAmountOfNums + minAmountOfSymbs)) {

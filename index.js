@@ -18,8 +18,9 @@
 
 function passwordNinja() {
   var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
-  var _ref = arguments[1];
-  var _ref$minAmountOfLower = _ref.minAmountOfLowerChars,
+
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$minAmountOfLower = _ref.minAmountOfLowerChars,
       minAmountOfLowerChars = _ref$minAmountOfLower === undefined ? 1 : _ref$minAmountOfLower,
       _ref$minAmountOfUpper = _ref.minAmountOfUpperChars,
       minAmountOfUpperChars = _ref$minAmountOfUpper === undefined ? 1 : _ref$minAmountOfUpper,
@@ -31,7 +32,6 @@ function passwordNinja() {
       toLowerCase = _ref$toLowerCase === undefined ? false : _ref$toLowerCase,
       _ref$toUpperCase = _ref.toUpperCase,
       toUpperCase = _ref$toUpperCase === undefined ? false : _ref$toUpperCase;
-
 
   /**
    * Exception throwing if the parameters are incorrect
@@ -49,8 +49,8 @@ function passwordNinja() {
     throw new TypeError('Parameters "toLowerCase" / "toUpperCase" must be a true or false');
   }
 
-  if (toLowerCase && toUpperCase || !toLowerCase && !toUpperCase) {
-    throw new TypeError('Parameters "toLowerCase" and "toUpperCase" can not simultaneously have the same values');
+  if (toLowerCase && toUpperCase) {
+    throw new TypeError('Parameters "toLowerCase" and "toUpperCase" can not simultaneously have the "true" values');
   }
 
   if (length < minAmountOfLowerChars + minAmountOfUpperChars + minAmountOfNums + minAmountOfSymbs) {

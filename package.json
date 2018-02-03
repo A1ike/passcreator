@@ -1,6 +1,6 @@
 {
   "name": "password-ninja",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "password-ninja is designed to quickly generate passwords",
   "files": [
     "index.js"
