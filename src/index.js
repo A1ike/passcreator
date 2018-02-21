@@ -1,5 +1,5 @@
 /*!
- * pass-creator <https://github.com/a1ike/pass-creator>
+ * password-ninja <https://github.com/a1ike/password-ninja>
  *
  * Copyright (c) 2018, Dmitry Katyushin.
  * Released under the MIT License.
